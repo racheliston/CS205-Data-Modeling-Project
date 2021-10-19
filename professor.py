@@ -1,4 +1,4 @@
-# professor provides the association between a student and a college
-# when a student joins a college within the university, an instance of Professor
-# is created -- shows that a college has a student 
+# professor: a person who teaches at the university
+# when a professor gets a new studnet, the student is saved in a set that professor owns
+
 
