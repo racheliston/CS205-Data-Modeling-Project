@@ -1,3 +1,5 @@
-# college: a school within the university
-# when a college is joined by a new student, the student is saved in a set that college owns
+# college provides the association between a student and a professor
+# when a professor gets a new student, an instance of College is created
+# this shows that a professor has a student
+
 
