@@ -10,7 +10,7 @@ class Student:
         s = '"' + self.student_name + '" ' + self.gpa + ' ' + self.major
         return s
 
-    def get_title(self):
+    def get_name(self):
         return self.student_name
 
     def __eq__(self, other):
