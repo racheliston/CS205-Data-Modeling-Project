@@ -1,6 +1,6 @@
 import university
 import student
-import professor
+import course
 
 # exercise code by calling functions to ensure code is being developed correctly
 # and we are testing correct functions
