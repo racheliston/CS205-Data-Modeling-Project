@@ -1,7 +1,7 @@
 import unittest
 import university
+import course
 import student
-import professor
 
 # unit tests for University application
 
