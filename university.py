@@ -1,4 +1,4 @@
-import college
+import enroll
 
 # design patter -- singleton pattern
 # define a static instance of the class itself and return
@@ -14,19 +14,13 @@ class University:
     @classmethod
     def get(self):
         if self.s_university is None:
-			self.s_university = University()
-		                #return self.s_university
-
+            self.s_university = University()
+        return self.s_university
+        
     def __init__(self):
         self.students = set()
-        self.professors = set()
-        self.colleges = set()
-
-    def add_professor(self, professor):
-        self.professors.add(professor)
-
-    def get_professors(self):
-        return self.professors
+        self.courses = set()
+        self.enrollments = set()
 
     def add_student(self, student):
         self.students.add(student)
@@ -34,17 +28,50 @@ class University:
     def get_students(self):
         return self.students
 
-    def find_professor_by_name(self, name):
-            for p in self.professors:
-			        if p.get_name() == name:
-				            return p
-		    return None
+    def add_course(self, course):
+        self.courses.add(course)
 
-    def find_student(self, student_name):
-		    students = []
-		    for s in self.students:
-			    if s.get_student_name() == student_name:
-				    students.append(s)
-		    return students
+    def get_courses(self):
+        return self.courses
+
+    def find_student_by_name(self, student_name):
+        for s in self.students:
+            if s.get_student_name() == student_name:
+                return s
+        return None
+    
+    def find_course(self, course_name):
+        courses = []
+        for c in self.courses:
+            if c.get_course_name == course_name:
+                courses.append(c)
+        return courses
+
+    def enroll_student(self, student, course):
+        if not self.is_enrolled(student):
+            enr = enroll.Enroll(student, course)
+            student.enroll_in_course(course)
+            self.enrollments.add(enr)
+            return enr
+        else:
+            return None
+
+    def is_enrolled(self, student):
+        for e in self.enrollments:
+            if e.get_student() == student:
+                return True
+        return False
+
+    def show_enrollments(self):
+        for e in self.enrollments:
+            string = e.get_student().to_string() + ' => ' + e.get_course().to_string()
+            print(string)
+
+    def get_enrolled_courses(self, s):
+        courselist = []
+        for e in self.enrollments:
+            if e.get_student() == s:
+                courselist.append(e.get_course())
+        return courselist
 
 
