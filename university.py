@@ -34,6 +34,12 @@ class University:
     def get_courses(self):
         return self.courses
 
+    def find_student_by_card(self, student_id):
+        for s in self.students:
+            if s.get_student_id() == student_id:
+                return s
+        return None
+
     def find_student_by_name(self, student_name):
         for s in self.students:
             if s.get_student_name() == student_name:
