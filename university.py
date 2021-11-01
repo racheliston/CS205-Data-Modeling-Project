@@ -80,4 +80,27 @@ class University:
                 courselist.append(e.get_course())
         return courselist
 
+    # incorrect implementation of drop out of course 
+
+    def drop_out_incorrect_implementation(self, student, course):
+        for e in self.enrollments:
+            if e.get_student() == student and e.get_course() == course:
+                self.enrollments.remove(e)
+                return True
+        return False 
+
+    # correct implementatino of drop out of course
+
+    def drop_out(self, student, course):
+        for e in self.enrollments:
+            if e.get_student() == student and e.get_course() == course:
+                self.enrollments.remove(e)
+                student.drop_out(course)
+                return True
+        return False
+
+    def drop_out_all_courses(self):
+        for s in self.students:
+            s.enrolled_courses = set()
+        self.enrollments = set()
 
