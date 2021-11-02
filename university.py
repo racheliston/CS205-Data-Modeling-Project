@@ -104,3 +104,27 @@ class University:
             s.enrolled_courses = set()
         self.enrollments = set()
 
+    # here is an incorrect implementation of "return book"
+    def unenroll_incorrect_implementation(self, student, course):
+        # this is incorrect because I am removing the book from the library's checkouts
+        # but not from the patron's checkouts
+        for s in self.enrollments:
+            if s.get_student() == student and s.get_course() == course:
+                self.enrollments.remove(s)
+                return True
+        return False
+
+    # and here is the correct implementation of "return book"
+    def unenroll(self, student, course):
+        # the correct implementation
+        for st in self.enrollments:
+            if st.get_student() == student and st.get_course() == course:
+                self.enrollments.remove(st)
+                student.return_course(course)
+                return True
+        return False
+
+    def unenroll_from_all_courses(self):
+        for s in self.students:
+            s.enrolled_courses = set()
+        self.enrollments = set()
