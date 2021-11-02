@@ -98,9 +98,24 @@ class TestEnroll(unittest.TestCase):
         if len(courses) == 1:
             self.assertEqual(courses[0], self.course_1)
 
-    
+	# -------------------------------------------------------------
 
+    def test_enroll_three(self):
+        # try enrolling rachel in a course and then dropping her out of it twice
+        # this should fail
 
+        # enroll rachel in a course
+        e = self.university.enroll_in_course(self.rachel, self.course_1)
+        self.assertIsNotNone(e)
 
+        # drop rachel out of that course
+        e = self.university.drop_out(self.rachel, self.course_1)
+        self.assertIsNotNone(e)
 
+        # try dropping rachel out of the course she has already dropped out of
+        # this should fail
+        e = self.university.drop_out(self.rachel, self.course_1)
+        self.assertIsNone(e)
+
+	# -------------------------------------------------------------
 
