@@ -51,5 +51,26 @@ class TestEnroll(unittest.TestCase):
         
 	# -------------------------------------------------------------
 
+    def test_enroll_one(self):
+        # enroll rachel in a course
+        e = self.university.enroll_in_course(self.rachel, self.course_2)
+        self.assertIsNotNone(e)
 
+        # check that the university shows one course is enrolled to rachel
+        courses = self.university.get_enrollments(self.rachel)
+        self.assertEqual(len(courses), 1)
+
+        # check that the course rachel is enrolled in is course_2
+        if len(courses) == 1:
+            self.assertEqual(courses[0], self.course_2)
+
+        # check that rachel shows she is enrolled in one course
+        courses = self.rachel.get_enrollments()
+        self.assertEqual(len(courses), 1)
+
+         # check that the course rachel is enrolled in is course_2
+        if len(courses) == 1:
+            self.assertEqual(courses[0], self.course_2)
+
+	# -------------------------------------------------------------
 
