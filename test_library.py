@@ -29,11 +29,11 @@ class TestCheckout(unittest.TestCase):
         cls.course_3 = course.Course(course_name_3, professor_3, major_b)
         cls.shannon = student.Student('Shannon')
         cls.rachel = student.Student('Rachel')
-        cls.library.add_patron(cls.shannon)
-        cls.library.add_patron(cls.rachel)
-        cls.library.add_book(cls.book_1)
-        cls.library.add_book(cls.book_2)
-        cls.library.add_book(cls.book_3)
+        cls.university.add_student(cls.shannon)
+        cls.university.add_student(cls.rachel)
+        cls.university.add_course(cls.course_1)
+        cls.university.add_course(cls.course_2)
+        cls.university.add_course(cls.course_3)
 
     @classmethod
     def tearDownClass(cls):
