@@ -51,6 +51,65 @@ class TestEnroll(unittest.TestCase):
         
 	# -------------------------------------------------------------
 
+    def test_drop_out_incorrect(self):
+        # this tests the incorrect version of return_book to library: this test will fail
+
+        # enroll Shannon in a course
+        self.university.enroll_student(self.shannon, self.course_1)
+        # return shannon's course--should return True
+        rc = self.university.drop_out_incorrect_implementation(self.shannon, self.course_1)
+        self.assertTrue(rc)
+
+        # try to drop out of the course again--should return False
+        rc = self.university.drop_out_incorrect_implementation(self.shannon, self.course_1)
+        self.assertFalse(rc)
+
+        # check that the university shows that shannon is not enrolled in any courses
+        courses = self.university.get_enrolled_courses(self.shannon)
+        self.assertEqual(len(courses), 0)
+
+        # check that shannon shows no enrollments
+        # right now, this code is failing, because my code is incorrect--
+        # I'm returning to the university but not to Student
+        courses = self.shannon.get_enrolled_courses()
+        self.assertEqual(len(courses), 0)
+
+    # -------------------------------------------------------------
+
+    def test_drop_out_correct(self):
+        # this tests the correct implemenation of unenroll student: it will succeeed
+
+        # enroll shannon in a course
+        self.university.enroll_student(self.shannon, self.course_1)
+        # return john's book--should return True
+        rc = self.university.drop_out(self.shannon, self.course_1)
+        self.assertTrue(rc)
+
+        # try to return the same book again--should return False
+        rc = self.university.drop_out(self.shannon, self.course_1)
+        self.assertFalse(rc)
+
+        # check that the library shows that john has no books checked out
+        courses = self.university.get_enrolled_courses(self.shannon)
+        self.assertEqual(len(courses), 0)
+
+        # check that john shows no books checked out
+        # this will pass
+        courses = self.john.get_enrolled_courses()
+        self.assertEqual(len(courses), 0)
+
+    # -------------------------------------------------------------
+
+    def test_find_course(self):
+        # this tests the systems method to look up a certain course
+        c3 = self.university.find_course(self.course_3)
+        self.assertIsNotNone(c3)
+
+        c2 = self.university.find_course(self.course_2)
+        self.assertIsNotNone(c2)
+
+    # -------------------------------------------------------------
+
     def test_enroll_one(self):
         # enroll rachel in a course
         e = self.university.enroll_in_course(self.rachel, self.course_2)
