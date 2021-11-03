@@ -11,7 +11,7 @@ class TestEnroll(unittest.TestCase):
     def setUpClass(cls):
         # Only call one time
         print('setUpClass()')
-        cls.library = university.University().get()
+        cls.university = university.University().get()
 
         # Define courses, professors, and majors
         course_name_1 = 'Software Engineering'
@@ -47,7 +47,7 @@ class TestEnroll(unittest.TestCase):
     def tearDown(self):
         # called after every test
         print('tearDown()')
-        self.university.unenroll_from_all_courses()
+        self.university.drop_out_all_courses()
         
 	# -------------------------------------------------------------
 
@@ -65,13 +65,13 @@ class TestEnroll(unittest.TestCase):
         self.assertFalse(rc)
 
         # check that the university shows that shannon is not enrolled in any courses
-        courses = self.university.get_enrolled_courses(self.shannon)
+        courses = self.university.get_enrollments(self.shannon)
         self.assertEqual(len(courses), 0)
 
         # check that shannon shows no enrollments
         # right now, this code is failing, because my code is incorrect--
         # I'm returning to the university but not to Student
-        courses = self.shannon.get_enrolled_courses()
+        courses = self.shannon.get_enrollments()
         self.assertEqual(len(courses), 0)
 
     # -------------------------------------------------------------
@@ -81,31 +81,31 @@ class TestEnroll(unittest.TestCase):
 
         # enroll shannon in a course
         self.university.enroll_student(self.shannon, self.course_1)
-        # return john's book--should return True
+        # return shannon's courses--should return True
         rc = self.university.drop_out(self.shannon, self.course_1)
         self.assertTrue(rc)
 
-        # try to return the same book again--should return False
+        # try to return the same course again--should return False
         rc = self.university.drop_out(self.shannon, self.course_1)
         self.assertFalse(rc)
 
-        # check that the library shows that john has no books checked out
-        courses = self.university.get_enrolled_courses(self.shannon)
+        # check that the university shows that shannon has no enrollments
+        courses = self.university.get_enrollments(self.shannon)
         self.assertEqual(len(courses), 0)
 
-        # check that john shows no books checked out
+        # check that shannon shows no enrollments
         # this will pass
-        courses = self.john.get_enrolled_courses()
+        courses = self.shannon.get_enrollments()
         self.assertEqual(len(courses), 0)
 
     # -------------------------------------------------------------
 
     def test_find_course(self):
         # this tests the systems method to look up a certain course
-        c3 = self.university.find_course(self.course_3)
+        c3 = self.university.find_course(self.course_name_3)
         self.assertIsNotNone(c3)
 
-        c2 = self.university.find_course(self.course_2)
+        c2 = self.university.find_course(self.course_name_2)
         self.assertIsNotNone(c2)
 
     # -------------------------------------------------------------
@@ -139,7 +139,7 @@ class TestEnroll(unittest.TestCase):
         self.assertEqual(len(courses), 0)
 
         # enroll rachel in a course
-        e = self.university.enroll_in_course(self.rachel, self.course_1)
+        e = self.university.enroll_student(self.rachel, self.course_1)
 
         # check that the university has rachel enrolled in one course
         courses = self.university.get_enrollments(self.rachel)
@@ -164,7 +164,7 @@ class TestEnroll(unittest.TestCase):
         # this should fail
 
         # enroll rachel in a course
-        e = self.university.enroll_in_course(self.rachel, self.course_1)
+        e = self.university.enroll_student(self.rachel, self.course_1)
         self.assertIsNotNone(e)
 
         # drop rachel out of that course

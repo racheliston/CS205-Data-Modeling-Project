@@ -34,6 +34,9 @@ class University:
     def get_courses(self):
         return self.courses
 
+    def get_course_name(self):
+        return self.course_name
+
     def find_student_by_id(self, student_id):
         for s in self.students:
             if s.get_student_id() == student_id:
@@ -73,7 +76,7 @@ class University:
             string = e.get_student().to_string() + ' => ' + e.get_course().to_string()
             print(string)
 
-    def get_enrolled_courses(self, s):
+    def get_enrollments(self, s):
         courselist = []
         for e in self.enrollments:
             if e.get_student() == s:
