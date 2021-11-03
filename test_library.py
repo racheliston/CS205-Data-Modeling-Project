@@ -112,7 +112,7 @@ class TestEnroll(unittest.TestCase):
 
     def test_enroll_one(self):
         # enroll rachel in a course
-        e = self.university.enroll_in_course(self.rachel, self.course_2)
+        e = self.university.enroll_student(self.rachel, self.course_2)
         self.assertIsNotNone(e)
 
         # check that the university shows one course is enrolled to rachel
@@ -160,21 +160,18 @@ class TestEnroll(unittest.TestCase):
 	# -------------------------------------------------------------
 
     def test_enroll_three(self):
-        # try enrolling rachel in a course and then dropping her out of it twice
-        # this should fail
-
         # enroll rachel in a course
         e = self.university.enroll_student(self.rachel, self.course_1)
-        self.assertIsNotNone(e)
 
-        # drop rachel out of that course
-        e = self.university.drop_out(self.rachel, self.course_1)
-        self.assertIsNotNone(e)
+        # enroll rachel in another course
+        e = self.university.enroll_student(self.rachel, self.course_1)
 
-        # try dropping rachel out of the course she has already dropped out of
-        # this should fail
-        e = self.university.drop_out(self.rachel, self.course_1)
-        self.assertIsNone(e)
+        # drop rachel out of all courses
+        e = self.university.drop_out_all_courses(self.rachel)
+
+        # check that rachel shows she is not enrolled in any courses
+        courses = self.rachel.get_enrollments()
+        self.assertEqual(len(courses), 0)
 
 	# -------------------------------------------------------------
 
