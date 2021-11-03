@@ -166,15 +166,15 @@ class TestEnroll(unittest.TestCase):
 
 	# -------------------------------------------------------------
 
-    def test_enroll_three(self):
+    def test_drop_all_courses(self):
         # enroll rachel in a course
         e = self.university.enroll_student(self.rachel, self.course_1)
 
         # enroll rachel in another course
-        e = self.university.enroll_student(self.rachel, self.course_1)
+        e = self.university.enroll_student(self.rachel, self.course_2)
 
         # drop rachel out of all courses
-        e = self.university.drop_out_all_courses(self.rachel)
+        e = self.university.drop_out_all_courses()
 
         # check that rachel shows she is not enrolled in any courses
         courses = self.rachel.get_enrollments()
