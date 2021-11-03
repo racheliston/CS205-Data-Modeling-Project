@@ -43,7 +43,7 @@ def simple_runtime_test(the_university):
     the_university.show_enrollments()
 
     student_id_to_look_for = 101
-    s = the_university.find_student_by_card(student_id_to_look_for)
+    s = the_university.find_student_by_id(student_id_to_look_for)
     if s is not None:
         courses = the_university.get_courses(s)
         if len(courses) > 0:
