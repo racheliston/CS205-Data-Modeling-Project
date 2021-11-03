@@ -37,26 +37,23 @@ class TestEnroll(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        # called one time, at the very end--if you need to do any final cleanup, do it here
         print('tearDownClass()')
 
     def setUp(self):
-        # called before every test
         print('setUp()')
 
     def tearDown(self):
-        # called after every test
         print('tearDown()')
         self.university.drop_out_all_courses()
         
 	# -------------------------------------------------------------
 
     def test_drop_out_incorrect(self):
-        # this tests the incorrect version of return_book to library: this test will fail
+        # this tests the incorrect version of enroll_student in a course: this test will fail
 
         # enroll Shannon in a course
         self.university.enroll_student(self.shannon, self.course_1)
-        # return shannon's course--should return True
+        # shannon drops her course--should return True
         rc = self.university.drop_out_incorrect_implementation(self.shannon, self.course_1)
         self.assertTrue(rc)
 
