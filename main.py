@@ -7,52 +7,59 @@ import course
 
 #--------------------------------------------------
 
-def simple_runtime_test(the_university):
+def simple_runtime_test(UVM):
+
+    # Define two students and add them to the university
     shannon = student.Student('Shannon')
     rachel = student.Student('Rachel')
-    the_university.add_student(shannon)
-    the_university.add_student(rachel)
+    UVM.add_student(shannon)
+    UVM.add_student(rachel)
 
+    # Define courses, professors, and majors
     course_name_1 = 'Software Engineering'
-    course_name_2 = 'Computer Organization'
-    course_1 = course.Course(course_name_1, 'Jason Hibbeler', 'Computer Science')
-    course_2 = course.Course(course_name_2, 'Jim Eddy', 'Computer Science')
-    the_university.add_course(course_1)
-    the_university.add_course(course_2)
+    course_name_2 = 'Abstract Algebra'
+    professor_1 = 'Jason Hibbeler'
+    professor_2 = 'Puck Rombach'
+    major_1 = 'Computer Science'
+    major_2 = 'Math'
+    course_1 = course.Course(course_name_1, professor_1, major_1)
+    course_2 = course.Course(course_name_2, professor_2, major_2)
+    UVM.add_course(course_1)
+    UVM.add_course(course_2)
 
     student_to_look_for = 'Shannon'
-    s = the_university.find_student_by_name(student_to_look_for)
-    if s is not None:
-        courses = the_university.find_course(course_name_1)
+    st = UVM.find_student_by_name(student_to_look_for)
+    if st is not None:
+        courses = UVM.find_course(course_name_1)
         if len(courses) > 0:
-            print('enroll ' + courses[0].to_string() + ' to ' + s.to_string())
-            the_university.enroll_student(s, courses[0])
+            print('enroll ' + courses[0].to_string() + ' to ' + st.to_string())
+            UVM.enroll_student(st, courses[0])
         else:
             print('cannot find student in course ' + course_name_1)
 
-        courses = the_university.find_course(course_name_2)
+        courses = UVM.find_course(course_name_2)
         if len(courses) > 0:
-            print('enroll ' + s.to_string() + ' in ' + courses[0].to_string())
-            the_university.enroll_student(s, courses[0])
+            print('enroll ' + st.to_string() + ' in ' + courses[0].to_string())
+            UVM.enroll_student(st, courses[0])
         else:
             print('cannot find student with course name ' + course_name_2)
     else:
         print('cannot find student with name', student_to_look_for)
 
     print('here are the enrollments in the university:')
-    the_university.show_enrollments()
+    UVM.show_enrollments()
 
     student_id_to_look_for = 101
-    s = the_university.find_student_by_id(student_id_to_look_for)
+    s = UVM.find_student_by_id(student_id_to_look_for)
     if s is not None:
-        courses = the_university.get_courses(s)
+        courses = UVM.get_courses(s)
         if len(courses) > 0:
             print('enroll ' + s.to_string() + ' in ' + courses[0].to_string())
         else:
             print('cannot find student with id #', student_id_to_look_for)
 
     print('here are the enrollments in the university:')
-    the_university.show_enrollments()
+    UVM.show_enrollments()
 
 #--------------------------------------------------
 
