@@ -100,13 +100,20 @@ class TestEnroll(unittest.TestCase):
 
     # -------------------------------------------------------------
 
-    def test_find_course(self):
-        # this tests the systems method to look up a certain course
-        c3 = self.university.find_course(self.course_name_3)
-        self.assertIsNotNone(c3)
+    def test_is_enrolled(self):
+        # enroll shannon in a course
+        self.university.enroll_student(self.shannon, self.course_1)
 
-        c2 = self.university.find_course(self.course_name_2)
-        self.assertIsNotNone(c2)
+        # return shannon's courses--should return True
+        e = self.university.is_enrolled(self.shannon)
+        self.assertTrue(e)
+
+        # return shannon's courses--should return True
+        rc = self.university.drop_out(self.shannon, self.course_1)
+        self.assertTrue(rc)
+
+        e = self.university.is_enrolled(self.shannon)
+        self.assertFalse(e)
 
     # -------------------------------------------------------------
 
