@@ -34,9 +34,6 @@ class University:
     def get_courses(self):
         return self.courses
 
-    def get_course_name(self):
-        return self.course_name
-
     def find_student_by_id(self, student_id):
         for s in self.students:
             if s.get_student_id() == student_id:
@@ -52,7 +49,7 @@ class University:
     def find_course(self, course_name):
         courses = []
         for c in self.courses:
-            if c.get_course_name == course_name:
+            if c.get_course_name() == course_name:
                 courses.append(c)
         return courses
 
